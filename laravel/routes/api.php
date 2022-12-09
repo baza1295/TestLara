@@ -1,6 +1,7 @@
 <?php
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\AccountController;
+use App\Http\Controllers\TransactionController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,6 +15,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::prefix('account')->group(function () {
+    Route::post('/', [AccountController::class, 'create']);
+    Route::get('/{accountId}/balance', [AccountController::class, 'balance']);
+    Route::get('/{accountId}/block', [AccountController::class, 'block']);
+});
+
+Route::prefix('transaction')->group(function () {
+    Route::post('/replenishment', [TransactionController::class, 'replenishment']);
+    Route::post('/withdrawal', [TransactionController::class, 'withdrawal']);
 });

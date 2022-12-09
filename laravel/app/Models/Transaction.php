@@ -18,6 +18,6 @@ class Transaction extends UuidPrimaryKey
 
     public function account()
     {
-        $this->belongsTo(Account::class);
+        return $this->belongsTo(Account::class);
     }
 }

@@ -35,7 +35,7 @@ class CreateAccountsTable extends Migration
             $table->uuid('id')->primary();
             $table->foreignUuid('account_id')->references('id')->on('accounts')->cascadeOnDelete();
             $table->float('value');
-            $table->dateTime('transaction date');
+            $table->dateTime('transaction_date');
             $table->timestamps();
         });
     }

@@ -8,6 +8,8 @@ class Account extends UuidPrimaryKey
 {
     use HasFactory;
 
+    const ACCOUNT_STATUS_DEFAULT = 1;
+
     protected $table = 'accounts';
 
     protected $fillable = [
@@ -20,6 +22,6 @@ class Account extends UuidPrimaryKey
 
     public function client()
     {
-        $this->belongsTo(Client::class, 'person_id', 'id');
+        return $this->belongsTo(Client::class, 'person_id', 'id');
     }
 }
