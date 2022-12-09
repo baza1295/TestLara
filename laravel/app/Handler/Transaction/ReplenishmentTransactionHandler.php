@@ -7,6 +7,7 @@ use App\Models\Account;
 use App\Models\Transaction;
 use Illuminate\Support\Facades\DB;
 use mysql_xdevapi\Exception;
+use Symfony\Component\Finder\Exception\AccessDeniedException;
 
 class ReplenishmentTransactionHandler
 {
@@ -26,8 +27,9 @@ class ReplenishmentTransactionHandler
             $account->balance += $request->getValue();
             $account->save();
 
-        } catch (Exception $e) {
+        } catch (\Throwable $e) {
             DB::rollBack();
+            throw new AccessDeniedException();
         }
 
         DB::commit();

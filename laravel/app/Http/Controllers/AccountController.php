@@ -7,6 +7,8 @@ use App\Http\Request\Account\CreateAccountRequest;
 use App\Http\Resource\Account\AccountBalanceResource;
 use App\Http\Resource\Account\AccountFullResource;
 use App\Models\Account;
+use Symfony\Component\Finder\Exception\AccessDeniedException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class AccountController extends Controller
 {
@@ -21,6 +23,11 @@ class AccountController extends Controller
     public function balance(string $accountId)
     {
         $account = Account::findOrFail($accountId);
+        if ($account->daily_withdrawal_limit > 4) {
+            throw new AccessDeniedException();
+        }
+        $account->daily_withdrawal_limit++;
+        $account->save();
         return new AccountBalanceResource($account);
     }
 
