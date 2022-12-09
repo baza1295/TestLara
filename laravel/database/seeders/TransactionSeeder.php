@@ -26,7 +26,7 @@ class TransactionSeeder extends Seeder
                     Transaction::create([
                         'account_id' => $account->id,
                         'value' => $value,
-                        'transaction date' => $faker->dateTime('-1 year')
+                        'transaction_date' => $faker->dateTime('-1 year')
                     ]);
                 }
                 $account->balance = $balance;
