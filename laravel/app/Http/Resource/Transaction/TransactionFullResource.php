@@ -15,7 +15,7 @@ class TransactionFullResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'transactionDate' => $this->transaction_date->format('Y-m-d H:i:s'),
+            'transactionDate' => $this->transaction_date,
             'value' => $this->value,
             'accountId' => $this->account->id,
         ];

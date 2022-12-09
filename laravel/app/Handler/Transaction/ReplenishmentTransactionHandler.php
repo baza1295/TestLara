@@ -15,7 +15,6 @@ class ReplenishmentTransactionHandler
         DB::beginTransaction();
 
         try {
-            dd(1);
             $account = Account::where('active', true)->findOrFail($request->getAccount());
 
             $transaction = Transaction::create([

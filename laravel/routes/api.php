@@ -24,4 +24,5 @@ Route::prefix('account')->group(function () {
 Route::prefix('transaction')->group(function () {
     Route::post('/replenishment', [TransactionController::class, 'replenishment']);
     Route::post('/withdrawal', [TransactionController::class, 'withdrawal']);
+    Route::get('/{accountId}/history', [TransactionController::class, 'history']);
 });
