@@ -1,0 +1,25 @@
+description: OK
+content:
+  application/json:
+    schema:
+      properties:
+        data:
+          type: object
+          properties:
+            accountId:
+              type: string
+              description: Account uuid
+              required: true
+              example: "fe45af15-f2df-46ff-896e-6ad9b6d3c11a"
+            value:
+              type: float
+              description: Количество пополнения
+              required: true
+              example: "1000.25"
+            transactionDate:
+              type: date-time
+              example: '2005-11-12 15:00:00'
+
+
+
+

@@ -1,0 +1,110 @@
+openapi: "3.0.2"
+info:
+  title: Test Lara
+  version: "1.0"
+servers:
+  - url: http://localhost:8000/
+paths:
+  api/account:
+    post:
+      tags:
+        - Account
+      summary: Создание аккаунта
+      description: >-
+        Создание аккаунта
+      requestBody:
+        $ref: "#/components/requestBodies/Account"
+      responses:
+        "200":
+          $ref: "#/components/responses/Account"
+        "403":
+          $ref: "#/components/responses/AccessDeniedException"
+        "404":
+          $ref: "#/components/responses/NotFoundException"
+
+  api/account/{aount_id}/balance:
+    get:
+      tags:
+        - Account
+      summary: Получение баланса
+      description: >-
+        Получение баланса
+      responses:
+        "200":
+          $ref: "#/components/responses/AccountBalance"
+        "403":
+          $ref: "#/components/responses/AccessDeniedException"
+        "404":
+          $ref: "#/components/responses/NotFoundException"
+
+  api/account/{aount_id}/block:
+    get:
+      tags:
+        - Account
+      summary: Блокировка аккаунта
+      description: >-
+        Блокировка аккаунта
+      responses:
+        "200":
+          $ref: "#/components/responses/Account"
+        "403":
+          $ref: "#/components/responses/AccessDeniedException"
+        "404":
+          $ref: "#/components/responses/NotFoundException"
+
+  api/transaction/replenishment:
+    post:
+      tags:
+        - Transaction
+      summary: Пополнение счета
+      description: >-
+        Пополнение счета
+      requestBody:
+        $ref: "#/components/requestBodies/ReplenishmentTransaction"
+      responses:
+        "200":
+          $ref: "#/components/responses/Transaction"
+        "403":
+          $ref: "#/components/responses/AccessDeniedException"
+        "404":
+          $ref: "#/components/responses/NotFoundException"
+
+  api/transaction/withdrawal:
+    post:
+      tags:
+        - Transaction
+      summary: Снятие со счета
+      description: >-
+        Снятие со счета
+      requestBody:
+        $ref: "#/components/requestBodies/ReplenishmentTransaction"
+      responses:
+        "200":
+          $ref: "#/components/responses/Transaction"
+        "403":
+          $ref: "#/components/responses/AccessDeniedException"
+        "404":
+          $ref: "#/components/responses/NotFoundException"
+
+  api/transaction/{account_id}/history:
+    get:
+      tags:
+        - Transaction
+      summary: Получение истории транзакций
+      description: >-
+        Получение истории транзакций
+      responses:
+        "200":
+          $ref: "#/components/responses/TransactionList"
+        "403":
+          $ref: "#/components/responses/AccessDeniedException"
+        "404":
+          $ref: "#/components/responses/NotFoundException"
+
+components:
+  requestBodies:
+    $ref: "./components/requestBodies/_index.yaml"
+  responses:
+    $ref: "./components/responses/_index.yaml"
+#  schemas:
+#    $ref: "./components/schemas/_index.yaml"

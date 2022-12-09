@@ -1,0 +1,17 @@
+ValidationException:
+  $ref: "./errors/ValidationException.yaml"
+AccessDeniedException:
+  $ref: "./errors/AccessDeniedException.yaml"
+NotFoundException:
+  $ref: "./errors/NotFoundException.yaml"
+
+Account:
+  $ref: "./Account/account.yaml"
+AccountBalance:
+  $ref: "./Account/AccountBalance.yaml"
+
+Transaction:
+  $ref: "./Transaction/Transaction.yaml"
+
+TransactionList:
+  $ref: "./Transaction/TransactionList.yaml"

@@ -1,0 +1,28 @@
+description: >-
+  403 Response У пользователя недостаточно прав для выполнения действия
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        error:
+          type: object
+          items:
+            properties:
+              code:
+                description: Internal server code
+                type: string
+              message:
+                description: The response message
+                type: string
+            required:
+              - code
+              - message
+      required:
+        - error
+    examples:
+      default:
+        value:
+          error:
+            code: 403
+            message: Access denied
