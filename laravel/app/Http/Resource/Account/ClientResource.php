@@ -1,9 +1,10 @@
 <?php
+
 namespace App\Http\Resource\Account;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class AccountFullResource extends JsonResource
+class ClientResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -13,10 +14,10 @@ class AccountFullResource extends JsonResource
      */
     public function toArray($request)
     {
-        return [
-            'client' => new ClientResource($this->whenLoaded('client')),
-            'balance' => $this->balance,
-            'status' => $this->active,
+        return  [
+            'name' => $this->name,
+            'document' => $this->document,
+            'birthDay' => $this->birth_date,
         ];
     }
 }

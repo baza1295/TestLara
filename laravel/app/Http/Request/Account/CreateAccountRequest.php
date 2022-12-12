@@ -19,24 +19,4 @@ class CreateAccountRequest extends FormRequest
             'balance' => ['numeric'],
         ];
     }
-
-    public function getName()
-    {
-        return $this->get('name');
-    }
-
-    public function getDocument()
-    {
-        return $this->get('document');
-    }
-
-    public function getBirthday()
-    {
-        return $this->get('birthDay') ? new \DateTime($this->get('birthDay')) : null;
-    }
-
-    public function getBalance()
-    {
-        return $this->get('balance');
-    }
 }

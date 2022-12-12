@@ -19,19 +19,4 @@ class TransactionRequest extends FormRequest
             'transactionDate' => ['required', 'date_format:Y-m-d H:i:s'],
         ];
     }
-
-    public function getAccount()
-    {
-        return $this->get('accountId');
-    }
-
-    public function getValue()
-    {
-        return $this->get('value');
-    }
-
-    public function getTransactionDate()
-    {
-        return new \DateTime($this->get('transactionDate'));
-    }
 }

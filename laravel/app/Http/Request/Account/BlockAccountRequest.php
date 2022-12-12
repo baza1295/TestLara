@@ -17,9 +17,4 @@ class BlockAccountRequest extends FormRequest
             'accountId' => ['uuid', 'required']
         ];
     }
-
-    public function getAccountId()
-    {
-        return $this->get('accountId');
-    }
 }

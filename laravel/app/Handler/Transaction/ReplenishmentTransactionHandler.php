@@ -2,36 +2,29 @@
 
 namespace App\Handler\Transaction;
 
-use App\Http\Request\Transaction\TransactionRequest;
 use App\Models\Account;
 use App\Models\Transaction;
-use Illuminate\Support\Facades\DB;
-use Symfony\Component\Finder\Exception\AccessDeniedException;
+use App\Handler\BaseHandler;
 
-class ReplenishmentTransactionHandler
+class ReplenishmentTransactionHandler extends BaseHandler
 {
-    public function handle(TransactionRequest $request)
+    /**
+     * @param $dto
+     * @return Transaction|\Illuminate\Database\Eloquent\Model
+     */
+    public function handleCommand($dto)
     {
-        DB::beginTransaction();
+        $account = Account::where('active', true)->findOrFail($dto->accountId);
 
-        try {
-            $account = Account::where('active', true)->findOrFail($request->getAccount());
+        $transaction = Transaction::create([
+            'account_id' => $account->id,
+            'value' => $dto->value,
+            'transaction_date' => $dto->transactionDate
+        ]);
 
-            $transaction = Transaction::create([
-                'account_id' => $account->id,
-                'value' => $request->getValue(),
-                'transaction_date' => $request->getTransactionDate()
-            ]);
+        $account->balance += $dto->value;
+        $account->save();
 
-            $account->balance += $request->getValue();
-            $account->save();
-
-        } catch (\Throwable $e) {
-            DB::rollBack();
-            throw new AccessDeniedException();
-        }
-
-        DB::commit();
         return $transaction;
     }
 }

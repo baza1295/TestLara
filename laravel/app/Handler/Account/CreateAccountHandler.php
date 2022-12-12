@@ -1,26 +1,31 @@
 <?php
 namespace App\Handler\Account;
 
-use App\Http\Request\Account\CreateAccountRequest;
 use App\Models\Account;
 use App\Models\Client;
+use App\Handler\BaseHandler;
+use App\Http\DTO\Account\CreateAccountDto;
 
-class CreateAccountHandler
+class CreateAccountHandler extends BaseHandler
 {
-    public function handle(CreateAccountRequest $request)
+    /**
+     * @param CreateAccountDto $dto
+     * @return Account|\Illuminate\Database\Eloquent\Model
+     */
+    public function handleCommand($dto)
     {
         $client = Client::create([
-            'name' => $request->getName(),
-            'birth_date' => $request->getBirthday(),
-            'document' => $request->getDocument()
+            'name' => $dto->name,
+            'birth_date' => $dto->birthDay,
+            'document' => $dto->document
         ]);
 
         return Account::create([
             'person_id' => $client->id,
-            'balance' => $request->getBalance(),
+            'balance' => $dto->balance,
             'daily_withdrawal_limit' => 0,
             'active' => true,
             'account_type' => Account::ACCOUNT_STATUS_DEFAULT
-        ]);
+        ])->setRelation('client', $client);
     }
 }

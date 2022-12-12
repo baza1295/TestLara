@@ -30,7 +30,7 @@ class ReplenishmentTest extends TestCase
         $secondResponse = $this->post("api/transaction/replenishment", $secondDate);
 
         $response->assertCreated();
-        $secondResponse->assertForbidden();
+        $secondResponse->assertNotFound();
 
         $response->json();
 

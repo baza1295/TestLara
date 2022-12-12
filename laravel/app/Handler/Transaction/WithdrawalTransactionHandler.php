@@ -2,37 +2,25 @@
 
 namespace App\Handler\Transaction;
 
-use App\Http\Request\Transaction\TransactionRequest;
 use App\Models\Account;
 use App\Models\Transaction;
-use Illuminate\Support\Facades\DB;
-use mysql_xdevapi\Exception;
-use Symfony\Component\Finder\Exception\AccessDeniedException;
+use App\Handler\BaseHandler;
 
-class WithdrawalTransactionHandler
+class WithdrawalTransactionHandler extends BaseHandler
 {
-    public function handle(TransactionRequest $request)
+    public function handleCommand($dto)
     {
-        DB::beginTransaction();
+        $account = Account::where([['active', true], ['balance', '>=', $dto->value]])->findOrFail($dto->accountId);
 
-        try {
-            $account = Account::where([['active', true], ['balance', '>=', $request->getValue()]])->findOrFail($request->getAccount());
+        $transaction = Transaction::create([
+            'account_id' => $account->id,
+            'value' => $dto->value * -1,
+            'transaction_date' => $dto->transactionDate
+        ]);
 
-            $transaction = Transaction::create([
-                'account_id' => $account->id,
-                'value' => $request->getValue() * -1,
-                'transaction_date' => $request->getTransactionDate()
-            ]);
+        $account->balance -= $dto->value;
+        $account->save();
 
-            $account->balance -= $request->getValue();
-            $account->save();
-
-        } catch (\Throwable $e) {
-            DB::rollBack();
-            throw new AccessDeniedException();
-        }
-
-        DB::commit();
         return $transaction;
     }
 }

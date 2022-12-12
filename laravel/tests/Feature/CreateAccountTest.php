@@ -23,12 +23,18 @@ class CreateAccountTest extends TestCase
             'api/account/',
             $data
         );
-
         $response->assertCreated();
-
-        $data['status'] = true;
-
-        $response->assertJsonPath('data', $data);
+        $response->assertJsonPath('data',
+            [
+                "client" => [
+                    "name" => 'Ivanov',
+                    "document" => 'qwerty',
+                    "birthDay" => '2000-10-10 00:00:00',
+                ],
+                "balance" => 1500,
+                "status" => true
+            ]
+        );
 
         DB::rollBack();
     }

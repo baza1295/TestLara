@@ -11,7 +11,7 @@ class BlockAccountTest extends TestCase
 {
     public function testBlcokAccount()
     {
-        $account = Account::where('active', true)->first();
+        $account = Account::with('client')->where('active', true)->first();
         $uuid = Str::uuid()->toString();
 
         DB::beginTransaction();
@@ -24,9 +24,11 @@ class BlockAccountTest extends TestCase
 
         $response->assertJsonPath('data',
             [
-                "name" => $account->client->name,
-                "document" => $account->client->document,
-                "birthDay" => $account->client->birth_date,
+                "client" => [
+                    "name" => $account->client->name,
+                    "document" => $account->client->document,
+                    "birthDay" => $account->client->birth_date,
+                ],
                 "balance" => $account->balance,
                 "status" => false
             ]
