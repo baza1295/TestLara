@@ -1,0 +1,7 @@
+version: '3.3'
+services:
+
+    documents:
+        build: docker/npm
+        volumes:
+            - ./../:/app

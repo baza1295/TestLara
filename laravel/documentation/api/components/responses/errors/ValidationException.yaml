@@ -1,0 +1,22 @@
+description: Указанное значение не удовлетворяет необходимым условиям. Запрос был отклонен.
+content:
+  application/json:
+    schema:
+      properties:
+        status:
+          description: Код ответа
+          type: integer
+          format: int64
+        key:
+          description: Ключ
+          type: string
+        message:
+          description: Описание
+          type: string
+      type: object
+    examples:
+      default:
+        value:
+          status: 400
+          key: incorrectValue
+          message: Error validation

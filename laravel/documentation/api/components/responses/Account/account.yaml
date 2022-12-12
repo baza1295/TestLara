@@ -1,0 +1,33 @@
+description: OK
+content:
+  application/json:
+    schema:
+      properties:
+        data:
+          type: object
+          properties:
+            name:
+              type: string
+              description: Наименование
+              required: true
+              example: "name"
+            document:
+              type: string
+              description: Документ
+              required: true
+              example: "document"
+            birthDay:
+              type: date-time
+              example: '2021-01-01'
+            balance:
+              type: float
+              description: Балансе
+              required: false
+              example: "1000"
+            status:
+              type: bool
+              example: true
+
+
+
+

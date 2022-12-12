@@ -1,0 +1,18 @@
+
+description: OK
+content:
+  application/json:
+    schema:
+      properties:
+        data:
+          type: object
+          properties:
+            balance:
+              type: float
+              description: Балансе
+              required: false
+              example: "1000"
+
+
+
+
