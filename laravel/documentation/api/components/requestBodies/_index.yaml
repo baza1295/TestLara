@@ -3,3 +3,6 @@ Account:
 
 ReplenishmentTransaction:
   $ref: "./Transaction/ReplenishmentTransaction.yaml"
+
+BlockAccount:
+  $ref: "./Account/BlockAccount.yaml"

@@ -3,12 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Handler\Account\CreateAccountHandler;
+use App\Http\Request\Account\BlockAccountRequest;
 use App\Http\Request\Account\CreateAccountRequest;
 use App\Http\Resource\Account\AccountBalanceResource;
 use App\Http\Resource\Account\AccountFullResource;
 use App\Models\Account;
 use Symfony\Component\Finder\Exception\AccessDeniedException;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class AccountController extends Controller
 {
@@ -31,9 +31,9 @@ class AccountController extends Controller
         return new AccountBalanceResource($account);
     }
 
-    public function block(string $accountId)
+    public function block(BlockAccountRequest $request)
     {
-        $account = Account::findOrFail($accountId);
+        $account = Account::findOrFail($request->getAccountId());
         $account->active = false;
         $account->save();
         return new AccountFullResource($account);

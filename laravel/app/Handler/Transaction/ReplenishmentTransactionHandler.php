@@ -6,7 +6,6 @@ use App\Http\Request\Transaction\TransactionRequest;
 use App\Models\Account;
 use App\Models\Transaction;
 use Illuminate\Support\Facades\DB;
-use mysql_xdevapi\Exception;
 use Symfony\Component\Finder\Exception\AccessDeniedException;
 
 class ReplenishmentTransactionHandler

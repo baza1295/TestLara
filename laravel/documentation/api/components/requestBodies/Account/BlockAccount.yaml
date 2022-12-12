@@ -1,0 +1,11 @@
+description: Блокировка Аккаунта
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        accountId:
+          type: string
+          description: Наименование
+          required: true
+          example: "fe45af15-f2df-46ff-896e-6ad9b6d3c11a"

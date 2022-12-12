@@ -37,13 +37,15 @@ paths:
         "404":
           $ref: "#/components/responses/NotFoundException"
 
-  api/account/{aount_id}/block:
-    get:
+  api/account/block:
+    put:
       tags:
         - Account
       summary: Блокировка аккаунта
       description: >-
         Блокировка аккаунта
+      requestBody:
+        $ref: "#/components/requestBodies/BlockAccount"
       responses:
         "200":
           $ref: "#/components/responses/Account"

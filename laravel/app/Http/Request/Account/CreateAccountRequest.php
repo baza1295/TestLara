@@ -15,7 +15,7 @@ class CreateAccountRequest extends FormRequest
         return [
             'name' => ['string', 'required', 'max:255'],
             'document' => ['string', 'required'],
-            'birthDay' => ['date_format:Y-m-d'],
+            'birthDay' => ['date_format:Y-m-d H:i:s'],
             'balance' => ['numeric'],
         ];
     }

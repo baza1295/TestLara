@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('account')->group(function () {
     Route::post('/', [AccountController::class, 'create']);
     Route::get('/{accountId}/balance', [AccountController::class, 'balance']);
-    Route::get('/{accountId}/block', [AccountController::class, 'block']);
+    Route::put('/block', [AccountController::class, 'block']);
 });
 
 Route::prefix('transaction')->group(function () {
